@@ -27,7 +27,7 @@ const routes: Routes = [
   // { path: 'protected', component: ProtectedComponent, canActivate: [LoggedInGuard] },
 
   // // nested 
-  // { path: 'products', component: ProductsComponent, children: childRoutes }
+  // { path: 'products/:id', component: ProductsComponent }
 ];
 
 @NgModule({
@@ -43,7 +43,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes)
     //ProductsModule
   ],
   providers: [
