@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { ProductsComponent } from './products/products.component';
 
+import { routes as childRoutes } from './products/products.module';
+
 import { AuthService } from './services/auth.service';
 
 import { LoggedInGuard } from './guards/logged-in.guard';
@@ -33,10 +35,13 @@ const routes: Routes = [
     component: ProtectedComponent, 
     canActivate: [LoggedInGuard] 
   },
-  { path: 'protected', component: ProtectedComponent, canActivate: [LoggedInGuard] },
 
   // // nested 
-  // { path: 'products/:id', component: ProductsComponent }
+  { 
+    path: 'products', 
+    component: ProductsComponent, 
+    children: childRoutes 
+  }
 ];
 
 @NgModule({
