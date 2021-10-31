@@ -14,6 +14,10 @@ import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { ProductsComponent } from './products/products.component';
 
+import { AuthService } from './services/auth.service';
+
+import { LoggedInGuard } from './guards/logged-in.guard';
+
 const routes: Routes = [
   // basic routes
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,8 +27,13 @@ const routes: Routes = [
   { path: 'contactus', redirectTo: 'contact' },
 
   // authentication demo
-  // { path: 'login', component: LoginComponent },
-  // { path: 'protected', component: ProtectedComponent, canActivate: [LoggedInGuard] },
+  { path: 'login', component: LoginComponent },
+  { 
+    path: 'protected', 
+    component: ProtectedComponent, 
+    canActivate: [LoggedInGuard] 
+  },
+  { path: 'protected', component: ProtectedComponent, canActivate: [LoggedInGuard] },
 
   // // nested 
   // { path: 'products/:id', component: ProductsComponent }
@@ -48,8 +57,8 @@ const routes: Routes = [
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    //AUTH_PROVIDERS,
-    //LoggedInGuard
+    { provide: LoggedInGuard, useClass: LoggedInGuard },
+    { provide: AuthService, useClass: AuthService },
   ],
   bootstrap: [AppComponent]
 })
